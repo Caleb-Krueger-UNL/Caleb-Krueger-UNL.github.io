@@ -656,56 +656,84 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">SRS =</span> <span class="fu">mean</span>(SRS)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>west_coast <span class="ot">&lt;-</span> b1g_combined <span class="sc">|&gt;</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(School <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Oregon"</span>, <span class="st">"USC"</span>, <span class="st">"Washington"</span>, <span class="st">"UCLA"</span>))</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>other_b1g <span class="ot">&lt;-</span> b1g_combined <span class="sc">|&gt;</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>School <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Oregon"</span>, <span class="st">"USC"</span>, <span class="st">"Washington"</span>, <span class="st">"UCLA"</span>))</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(b1g_combined<span class="sc">$</span>OSRS), <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(b1g_combined<span class="sc">$</span>DSRS), <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> other_b1g,</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS, <span class="at">size =</span> Wins),</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey60"</span>,</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> west_coast,</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS, <span class="at">size =</span> Wins, <span class="at">color =</span> School)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> b1g_combined,</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS, <span class="at">label =</span> School),</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.2</span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">13.5</span>, <span class="at">y =</span> <span class="fl">12.5</span>, <span class="at">label =</span> <span class="st">"Good Defense, Good Offense"</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">5.5</span>, <span class="at">label =</span> <span class="st">"Bad Defense, Bad Offense"</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">13.5</span>, <span class="at">y =</span> <span class="fu">mean</span>(b1g_combined<span class="sc">$</span>OSRS) <span class="sc">+</span> <span class="fl">0.7</span>, <span class="at">label =</span> <span class="st">"Big Ten Avg Offense"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">mean</span>(b1g_combined<span class="sc">$</span>DSRS) <span class="sc">-</span> <span class="fl">0.3</span>, <span class="at">y =</span> <span class="fl">12.5</span>, <span class="at">label =</span> <span class="st">"Big Ten Avg Defense"</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Oregon"</span> <span class="ot">=</span> <span class="st">"#154733"</span>,</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"USC"</span> <span class="ot">=</span> <span class="st">"#990000"</span>,</span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Washington"</span> <span class="ot">=</span> <span class="st">"#4B2E83"</span>,</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"UCLA"</span> <span class="ot">=</span> <span class="st">"#2D68C4"</span></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Defense Separated Oregon From Its West Coast Peers"</span>,</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Combined 2024–25 Big Ten averages. Oregon was the only newcomer with an above-average offense and defense."</span>,</span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Defensive Rating"</span>,</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Offensive Rating"</span>,</span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"2-Yr Wins"</span>,</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By Caleb Krueger"</span></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">9.5</span>),</span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>oregon <span class="ot">&lt;-</span> b1g_combined <span class="sc">|&gt;</span> <span class="fu">filter</span>(School <span class="sc">==</span> <span class="st">"Oregon"</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>usc <span class="ot">&lt;-</span> b1g_combined <span class="sc">|&gt;</span> <span class="fu">filter</span>(School <span class="sc">==</span> <span class="st">"USC"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>washington <span class="ot">&lt;-</span> b1g_combined <span class="sc">|&gt;</span> <span class="fu">filter</span>(School <span class="sc">==</span> <span class="st">"Washington"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>ucla <span class="ot">&lt;-</span> b1g_combined <span class="sc">|&gt;</span> <span class="fu">filter</span>(School <span class="sc">==</span> <span class="st">"UCLA"</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> b1g_combined,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS, <span class="at">size =</span> Wins),</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> ucla,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS),</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#2D68C4"</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> usc,</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS),</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#990000"</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">4.2</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> washington,</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS),</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#4B2E83"</span>,</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> oregon,</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS),</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#154733"</span>,</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">3.16</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">5.38</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> b1g_combined,</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DSRS, <span class="at">y =</span> OSRS, <span class="at">label =</span> School),</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">13.5</span>, <span class="at">y =</span> <span class="fl">12.5</span>, <span class="at">label =</span> <span class="st">"Good Defense, Good Offense"</span>),</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">5.5</span>, <span class="at">label =</span> <span class="st">"Bad Defense, Bad Offense"</span>),</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">13.5</span>, <span class="at">y =</span> <span class="fl">3.85</span>, <span class="at">label =</span> <span class="st">"Big Ten Avg Offense"</span>),</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">3.2</span>, <span class="at">y =</span> <span class="fl">12.5</span>, <span class="at">label =</span> <span class="st">"Big Ten Avg Defense"</span>),</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>), <span class="at">name =</span> <span class="st">"2-Yr Wins"</span>) <span class="sc">+</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Defense Separated Oregon From Its West Coast Peers"</span>,</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Combined 2024–25 Big Ten averages. Oregon was the only newcomer with an above-average offense and defense."</span>,</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Defensive Rating"</span>,</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Offensive Rating"</span>,</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By Caleb Krueger"</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">9.5</span>),</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -844,23 +872,23 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fhweyitkzq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fhweyitkzq table {
+<div id="hwxevjigym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hwxevjigym table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fhweyitkzq thead, #fhweyitkzq tbody, #fhweyitkzq tfoot, #fhweyitkzq tr, #fhweyitkzq td, #fhweyitkzq th {
+#hwxevjigym thead, #hwxevjigym tbody, #hwxevjigym tfoot, #hwxevjigym tr, #hwxevjigym td, #hwxevjigym th {
   border-style: none;
 }
 
-#fhweyitkzq p {
+#hwxevjigym p {
   margin: 0;
   padding: 0;
 }
 
-#fhweyitkzq .gt_table {
+#hwxevjigym .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -886,12 +914,12 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-left-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_caption {
+#hwxevjigym .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fhweyitkzq .gt_title {
+#hwxevjigym .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -903,7 +931,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-bottom-width: 0;
 }
 
-#fhweyitkzq .gt_subtitle {
+#hwxevjigym .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -915,7 +943,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-top-width: 0;
 }
 
-#fhweyitkzq .gt_heading {
+#hwxevjigym .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -927,13 +955,13 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-right-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_bottom_border {
+#hwxevjigym .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_col_headings {
+#hwxevjigym .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -948,7 +976,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-right-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_col_heading {
+#hwxevjigym .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -968,7 +996,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   overflow-x: hidden;
 }
 
-#fhweyitkzq .gt_column_spanner_outer {
+#hwxevjigym .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -980,15 +1008,15 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   padding-right: 4px;
 }
 
-#fhweyitkzq .gt_column_spanner_outer:first-child {
+#hwxevjigym .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fhweyitkzq .gt_column_spanner_outer:last-child {
+#hwxevjigym .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fhweyitkzq .gt_column_spanner {
+#hwxevjigym .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1000,11 +1028,11 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   width: 100%;
 }
 
-#fhweyitkzq .gt_spanner_row {
+#hwxevjigym .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fhweyitkzq .gt_group_heading {
+#hwxevjigym .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1030,7 +1058,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   text-align: left;
 }
 
-#fhweyitkzq .gt_empty_group_heading {
+#hwxevjigym .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1045,15 +1073,15 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   vertical-align: middle;
 }
 
-#fhweyitkzq .gt_from_md > :first-child {
+#hwxevjigym .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fhweyitkzq .gt_from_md > :last-child {
+#hwxevjigym .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fhweyitkzq .gt_row {
+#hwxevjigym .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1072,7 +1100,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   overflow-x: hidden;
 }
 
-#fhweyitkzq .gt_stub {
+#hwxevjigym .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1085,7 +1113,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   padding-right: 5px;
 }
 
-#fhweyitkzq .gt_stub_row_group {
+#hwxevjigym .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1099,15 +1127,15 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   vertical-align: top;
 }
 
-#fhweyitkzq .gt_row_group_first td {
+#hwxevjigym .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fhweyitkzq .gt_row_group_first th {
+#hwxevjigym .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fhweyitkzq .gt_summary_row {
+#hwxevjigym .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1117,16 +1145,16 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   padding-right: 5px;
 }
 
-#fhweyitkzq .gt_first_summary_row {
+#hwxevjigym .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_first_summary_row.thick {
+#hwxevjigym .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fhweyitkzq .gt_last_summary_row {
+#hwxevjigym .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,7 +1164,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-bottom-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_grand_summary_row {
+#hwxevjigym .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1146,7 +1174,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   padding-right: 5px;
 }
 
-#fhweyitkzq .gt_first_grand_summary_row {
+#hwxevjigym .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1156,7 +1184,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-top-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_last_grand_summary_row_top {
+#hwxevjigym .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1166,11 +1194,11 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-bottom-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_striped {
+#hwxevjigym .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fhweyitkzq .gt_table_body {
+#hwxevjigym .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1179,7 +1207,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-bottom-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_footnotes {
+#hwxevjigym .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1193,7 +1221,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-right-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_footnote {
+#hwxevjigym .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1202,7 +1230,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   padding-right: 5px;
 }
 
-#fhweyitkzq .gt_sourcenotes {
+#hwxevjigym .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1216,7 +1244,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   border-right-color: #D3D3D3;
 }
 
-#fhweyitkzq .gt_sourcenote {
+#hwxevjigym .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1224,72 +1252,72 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
   padding-right: 5px;
 }
 
-#fhweyitkzq .gt_left {
+#hwxevjigym .gt_left {
   text-align: left;
 }
 
-#fhweyitkzq .gt_center {
+#hwxevjigym .gt_center {
   text-align: center;
 }
 
-#fhweyitkzq .gt_right {
+#hwxevjigym .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fhweyitkzq .gt_font_normal {
+#hwxevjigym .gt_font_normal {
   font-weight: normal;
 }
 
-#fhweyitkzq .gt_font_bold {
+#hwxevjigym .gt_font_bold {
   font-weight: bold;
 }
 
-#fhweyitkzq .gt_font_italic {
+#hwxevjigym .gt_font_italic {
   font-style: italic;
 }
 
-#fhweyitkzq .gt_super {
+#hwxevjigym .gt_super {
   font-size: 65%;
 }
 
-#fhweyitkzq .gt_footnote_marks {
+#hwxevjigym .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fhweyitkzq .gt_asterisk {
+#hwxevjigym .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fhweyitkzq .gt_indent_1 {
+#hwxevjigym .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fhweyitkzq .gt_indent_2 {
+#hwxevjigym .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fhweyitkzq .gt_indent_3 {
+#hwxevjigym .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fhweyitkzq .gt_indent_4 {
+#hwxevjigym .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fhweyitkzq .gt_indent_5 {
+#hwxevjigym .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fhweyitkzq .katex-display {
+#hwxevjigym .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fhweyitkzq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hwxevjigym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
