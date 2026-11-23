@@ -195,6 +195,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p>Ever since the introduction of NIL, every offseason in college football feels like a high-stakes auction. Coaches chase proven production, fan bases track portal rankings like recruiting classes, and big names arrive on campus with massive expectations on them. When a quarterback puts his name in the portal, the assumption usually is they want a new system, a fresh start, a higher star rating, or a bigger paycheck. For one reason or another they transfer, and automatically assume their performance will reach a new level.&nbsp;</p>
+<p>Looking back at the top 15 qualifying quarterbacks from the 2025 transfer portal, that assumption sometimes faces a harsh reality. Using data from Sports Reference and 247Sports, I filtered for quarterbacks who actually played meaningful snaps rather than brief end-of-game appearances, then tracked how those 15 passers performed in 2024 compared to 2025, and whether portal hype actually translated into better play once they got to their new schools. I stuck with completed full-season numbers from 2024 and 2025 rather than mixing in 2026 stats, since the 2026 season is still underway and partial-season numbers wouldn’t be a fair comparison.&nbsp;</p>
+<p>The quickest way to cut through the offseason noise is to look at what happened on the field before and after the moves. In the chart below, each quarterback’s 2024 passer efficiency rating (red) connects to his 2025 rating (green), ordered from the biggest drop at the top to the biggest jump at the bottom.&nbsp;</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -263,6 +266,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The first thing that jumped off the screen is how few of these moves actually produced a clear step forward. Most of the top quarterbacks either stayed in a similar performance range or even played worse after changing jerseys. Even when a player arrived with a lot of hype, a new offense and a new locker room didn’t automatically turn him into a more efficient passer.&nbsp;</p>
+<p>If changing scenery doesn’t guarantee a leap on its own, what about how highly the quarterback was rated coming out of the portal? To test that, I plotted each quarterback’s 247Sports portal rating against his 2025 passer efficiency rating.&nbsp;</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -307,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.865</span>, <span class="fl">0.985</span>)) <span class="sc">+</span></span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Higher transfer ratings didn't guarantee better 2025 play"</span>,</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Portal ratings showed almost no link to 2025 efficiency,</span><span class="sc">\n</span><span class="st">from Indiana's Fernando Mendoza (crimson) to UCLA's Nico Iamaleava (blue)."</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Portal ratings showed almost no link to 2025 efficiency,</span><span class="sc">\n</span><span class="st">from Indiana's Fernando Mendoza (red) to UCLA's Nico Iamaleava (blue)."</span>,</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"247Sports Portal Rating"</span>,</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"2025 Passer Efficiency Rating"</span>,</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: Sports Reference &amp; 247Sports | By: Caleb Krueger"</span></span>
@@ -329,6 +334,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The trend line tells a pretty clear story: portal ratings had almost no meaningful link to how efficiently these quarterbacks played in 2025 (p-value of 0.678, adjusted R-squared of -0.062). High marks in the portal didn’t reliably separate the passers who thrived from the ones who struggled.&nbsp;</p>
+<p>Two names stood out immediately on either side of the story. Fernando Mendoza (in red) didn’t just perform better at Indiana—he turned a transfer move into a historic run that ended with him winning the Heisman Trophy and helping Indiana win the national championship. On the flip side, Nico Iamaleva (in blue) carried on of the highest portal ratings in the group after UCLA leaving Tennessee, yet his 2025 passer efficiency sat well below the mark you would expect with all the hype around his move.&nbsp;</p>
+<p>Passer efficiency gives you the big picture, but box-score numbers help show what those swings looked like across a full season. This table sorts all 15 quarterbacks by their year-over-year efficiency change, alongside their 2024 and 2025 schools and their 2025 passing yards, touchdowns, and interceptions.&nbsp;</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1014,6 +1022,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Only five of the 15 qualifying portal quarterbacks had a higher passer efficiency rating in 2025 than they had the year before. Mendoza led the improvers with 3,535 passing yards, 41 touchdowns, and just 6 interceptions on his way to a +38.3 efficiency jump, a Heisman Trophy winner, and eventually becoming the No.1 overall pick in the 2026 NFL Draft. Other Quarterbacks like Conner Weigman (+30.7), Devon Dampier (+25.2), and Carson Beck (+11.7; 3,813 yards, 30 TDS, 12 INTs at Miami before hearing his name called by the Cardinals in the 2026 NFL Draft) also turned their moves into big seasons. Meanwhile, the majority of the list, including high-profile transfers like Nico Iamaleava (-21.8) and John Matter (-34.7) saw their efficiency dip after switching teams, leaving them questioning their decisions.&nbsp;</p>
+<p>None of this means the transfer portal doesn’t matter or that talented quarterbacks can’t revitalize their careers or play their way into the NFL Draft. It just means that a big portal rating or a big announcement isn’t a finished product. Fit, supporting cast, play-calling, and adjusting to a new level of competition all play huge roles, and with two-thirds of these top transfers taking a step back in efficiency, there are plenty of reminders to look closer before buying into the hype.&nbsp;</p>
 
 
 
